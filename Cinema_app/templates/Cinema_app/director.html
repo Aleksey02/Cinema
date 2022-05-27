@@ -1,0 +1,15 @@
+{% extends 'Cinema_app/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h3>Фильмы в которых участвовал режиссёр {{ director.full_name }}</h3>
+        <div class="col-4 d-flex  gap-5">
+            {% for film in film_play %}
+            <div class="films">
+                <a href="{% url 'film' pk=film.pk %}" class="d-flex flex-column align-items-center"><img src="{{ film.image.url }}"  style="width: 250px; height: 300px;">{{ film.title }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

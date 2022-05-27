@@ -1,0 +1,66 @@
+{% extends 'Cinema_app/base.html' %}
+{% load static %}
+{% block title %} {{ film.title }} {% endblock title %}
+
+{% block content %}
+    <div class="container my-bg">
+    <div class="d-flex py-4 px-0">
+        {% if film.image %}
+            <img src="{{ film.image.url }}" alt="" style="width: 300px; height: 400px">
+        {% endif %}
+        <div class="px-5 d-flex flex-column">
+            <p><span class="link-film">Название: </span>{{ film.title }}</p>
+            <p>Возрастной рейтинг: {{ film.get_lim_age_display }}</p>
+            <p>Год: {{ film.year }}</p>
+            <p>Жанр: {{ film.get_ganre_display }}</p>
+            <p>Режиссёры: {% for director in film.director_set.all %}<a href="{% url 'director' director.pk %}">{{ director.full_name }}</a>,{% endfor %}</p>
+            <p>Актёры: {% for actor in film.actor_set.all %}<a href="{% url 'actor' actor.pk %}">{{ actor.full_name }}</a>,{% endfor %}</p>
+        </div>
+    </div>
+
+<div class="flex-column">
+<h3>Описание</h3>
+    <p>{{ film.description }}</p>
+    <h4>Комментарии</h4>
+    {% if film.comments.count > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Автор комментария</th>
+                    <th scope="col">Комментарий</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for comment in film.comments.all %}
+                    <tr>
+                      <th scope="row">{{ comment.comment_author }}</th>
+                      <td>{{ comment.comment_text }}</td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        На данный момент комментариев нет. Будьте первыми :)
+    {% endif %}
+    {% if user.is_authenticated %}
+{#        <form method="POST" action="{% url 'film' film.pk %}">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{#            #}
+{#        </form>#}
+        <a class="btn btn-primary" href="{% url 'comment' film.pk %}">Написать комментарий</a>
+    {% else %}
+        <br><br>
+    <p>Что бы писать комментарии нужно зарегестрироваться</p>
+    <p>Желаете пройти регистрацию? <a href="{% url 'register' %}">Sign up</a></p>
+    <p>Если у вас уже имеется аккаунт <a href="{% url 'login' %}">Log in</a></p>
+    {% endif %}
+</div>
+
+
+
+
+</div>
+{% endblock content %}

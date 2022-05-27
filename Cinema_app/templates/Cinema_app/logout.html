@@ -1,0 +1,9 @@
+{% extends 'Cinema_app/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Logout Page</h1>
+        <p>Вы вышли со своего аккаунта</p>
+        <p>Желаете обратно зайти в аккаунт? <a href="{% url 'login' %}">Log in</a> </p>
+    </div>
+{% endblock %}
