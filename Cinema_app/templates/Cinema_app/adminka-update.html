@@ -1,0 +1,12 @@
+{% extends 'Cinema_app/adminka.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container w-100">
+        <h1>New post</h1>
+        <form action="" method="POST" class="uniForm" enctype="multipart/form-data">{% csrf_token %}
+            {{ form|crispy }}<br>
+          <input type="submit" value="Сохранить изменения" class="btn btn-primary"/>
+        </form>
+    </div>
+{% endblock %}

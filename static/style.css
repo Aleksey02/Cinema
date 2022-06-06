@@ -1,7 +1,29 @@
-.link-film{
-    text-decoration: none;
-    color: gray;
-}
 body{
     background: #0e121b;
+    color: white;
+}
+.link-film{
+    text-decoration: none;
+    color: grey;
+    transition: all 0.3s;
+}
+.link-film:hover{
+    color: lightgray;
+    transform: scale(1.1);
+}
+.desc-film{
+    color: grey;
+    font-weight: bold;
+}
+.info-film{
+    color: white;
+}
+.desc-film >.link-film{
+    color: white;
+    font-weight: normal;
+    transition: all 0.3s;
+}
+.desc-film >.link-film:hover{
+    color: slategray;
+    transform: scale(1.1);
 }

@@ -1,6 +1,7 @@
 {% extends 'Cinema_app/base.html' %}
 
 {% block content %}
+<div class="container">
     <h1>Add comment</h1>
     <form method="POST">
         {% csrf_token %}
@@ -8,4 +9,5 @@
 
         <button class="btn btn-outline-success">Success</button>
     </form>
+</div>
 {% endblock %}

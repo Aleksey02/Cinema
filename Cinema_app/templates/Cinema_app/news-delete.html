@@ -1,0 +1,7 @@
+{% extends 'Cinema_app/adminka.html' %}
+
+{% block content %}
+    Вы действительно хотите удалить новость <big>{{ object }}</big>
+    <a href="{% url 'news-delete' new.pk %}" class="btn btn-danger">Да</a>
+    <a href="{% url 'adminka' %}" class="btn btn-primary">Нет</a>
+{% endblock %}

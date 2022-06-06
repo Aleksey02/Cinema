@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from .models import Film, Comment, Actor, Director
+from .models import Film, Comment, Actor, Director, New
 from .forms import UserRegisterForm
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -120,4 +120,64 @@ def Directorf(request, pk): # f так как нужно различноне н
     context = {'director': director_name, 'film_play':film_play}
     return render(request, 'Cinema_app/director.html', context)
 
+class Adminka(ListView):
+    model = Film
+    template_name = 'Cinema_app/adminka.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news'] = New.objects.all()
+        return context
+
+
+class AdminkaUpdate(UpdateView):
+    model = Film
+    template_name = 'Cinema_app/adminka-update.html'
+    fields = '__all__'
+
+    def get_absolute_url(self):
+        return reverse('adminka')
+
+class AdminkaDeletePage(DetailView):
+    model = Film
+    template_name = 'Cinema_app/adminka-delete.html'
+
+def AdminkaDelete(request, pk):
+    film = Film.objects.get(pk=pk)
+    film.delete()
+    return redirect('adminka')
+
+class AdminkaCreate(CreateView):
+    model = Film
+    template_name = 'Cinema_app/adminka-update.html'
+    fields = '__all__'
+    success_url = reverse_lazy('adminka')
+
+class NewsList(ListView):
+    model = New
+    template_name = 'Cinema_app/news.html'
+
+class NewsDetail(DetailView):
+    model = New
+    template_name = 'Cinema_app/news-detail.html'
+
+class NewsUpdate(UpdateView):
+    model = New
+    template_name = 'Cinema_app/adminka-update.html'
+    fields = '__all__'
+
+def NewsDelete(request, pk):
+    news = New.objects.get(pk=pk)
+    news.delete()
+    return redirect('adminka')
+
+class NewsDeletePage(DetailView):
+    model = New
+    template_name = 'Cinema_app/news-delete.html'
+
+class NewsCreate(CreateView):
+    model = New
+    template_name = 'Cinema_app/adminka-update.html'
+    fields = '__all__'
+    success_url = reverse_lazy('adminka')
 

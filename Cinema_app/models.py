@@ -31,15 +31,18 @@ class Film(models.Model):
     image = models.ImageField(verbose_name='Картинка', null=True)
     lim_age = models.CharField(verbose_name='Возрастной рейтинг', choices=CHOICES_lim_age, max_length=50, default='1')
     country = models.CharField(verbose_name='Страна', max_length=50, blank=True, null=True)
-    poster = models.ImageField(verbose_name='Постер', null=True)
+    poster = models.ImageField(verbose_name='Постер', null=True, blank=True)
 
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('adminka')
+
 class Comment(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='comments')
     comment_text = models.TextField(verbose_name='Текст комментария')
-    comment_author = models.CharField(max_length=50, verbose_name='Имя автора комментария', default='Ваше имя')
+    comment_author = models.CharField(max_length=50, verbose_name='Имя автора комментария')
 
     def get_absolute_url(self):
         return reverse('film', kwargs={'pk': self.film_id})
@@ -60,3 +63,13 @@ class Director(models.Model): #Режиссёр
 
     def __str__(self):
         return self.full_name
+
+class New(models.Model):
+    title = models.CharField(max_length=50, verbose_name='Заголовок')
+    description = models.TextField(verbose_name='Текст')
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('adminka')

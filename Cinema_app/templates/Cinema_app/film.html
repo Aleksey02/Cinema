@@ -9,21 +9,21 @@
             <img src="{{ film.image.url }}" alt="" style="width: 300px; height: 400px">
         {% endif %}
         <div class="px-5 d-flex flex-column">
-            <p><span class="link-film">Название: </span>{{ film.title }}</p>
-            <p>Возрастной рейтинг: {{ film.get_lim_age_display }}</p>
-            <p>Год: {{ film.year }}</p>
-            <p>Жанр: {{ film.get_ganre_display }}</p>
-            <p>Режиссёры: {% for director in film.director_set.all %}<a href="{% url 'director' director.pk %}">{{ director.full_name }}</a>,{% endfor %}</p>
-            <p>Актёры: {% for actor in film.actor_set.all %}<a href="{% url 'actor' actor.pk %}">{{ actor.full_name }}</a>,{% endfor %}</p>
+            <p class="info-film"><span class="desc-film">Название: </span>{{ film.title }}</p>
+            <p class="info-film"><span class="desc-film">Возрастной рейтинг: </span>{{ film.get_lim_age_display }}</p>
+            <p class="info-film"><span class="desc-film">Год: </span>{{ film.year }}</p>
+            <p class="info-film"><span class="desc-film">Жанр: </span>{{ film.get_ganre_display }}</p>
+            <p class="info-film"><span class="desc-film">Режиссёры: {% for director in film.director_set.all %}<a href="{% url 'director' director.pk %} " class="link-film">{{ director.full_name }}</a>,{% endfor %}</span></p>
+            <p class="info-film"><span class="desc-film">Актёры: {% for actor in film.actor_set.all %}<a href="{% url 'actor' actor.pk %}" class="link-film">{{ actor.full_name }}</a>,{% endfor %}</span></p>
         </div>
     </div>
 
-<div class="flex-column">
+<div class="flex-column my-desc">
 <h3>Описание</h3>
     <p>{{ film.description }}</p>
     <h4>Комментарии</h4>
     {% if film.comments.count > 0 %}
-        <table class="table">
+        <table class="table info-film">
             <thead>
                 <tr>
                     <th scope="col">Автор комментария</th>
@@ -54,8 +54,8 @@
     {% else %}
         <br><br>
     <p>Что бы писать комментарии нужно зарегестрироваться</p>
-    <p>Желаете пройти регистрацию? <a href="{% url 'register' %}">Sign up</a></p>
-    <p>Если у вас уже имеется аккаунт <a href="{% url 'login' %}">Log in</a></p>
+    <p>Желаете пройти регистрацию? <a href="{% url 'register' %}" class="link-film">Sign up</a></p>
+    <p>Если у вас уже имеется аккаунт <a href="{% url 'login' %}" class="link-film">Log in</a></p>
     {% endif %}
 </div>
 

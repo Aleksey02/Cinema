@@ -5,14 +5,12 @@ from django.contrib.auth.models import User
 from .models import Comment
 
 
-
-
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ["comment_author", "comment_text"]
-        widgets = {"comment_text": forms.Textarea(attrs={'class': 'form-control'}),
-                   "comment_author": forms.TextInput(attrs={'class': 'form-control'})}
+        widgets = {"comment_text": forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Введите ваш комментарий'}),
+                   "comment_author": forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите ваше имя'})}
 
 class UserRegisterForm(UserCreationForm):
     class Meta:

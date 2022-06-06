@@ -7,7 +7,7 @@
     <div class="container d-flex flex-wrap py-4 my-bg" style="row-gap: 30px;">
     {% for film in filt %}
 
-        <a href="{% url 'film' film.pk %}" class="d-flex flex-column align-items-center col-4">
+        <a href="{% url 'film' film.pk %}" class="d-flex flex-column align-items-center col-4 link-film">
             {% if film.image %}
             <img src="{{ film.image.url }}" alt="" style="width: 300px; height: 400px">
             {{ film.title }}
