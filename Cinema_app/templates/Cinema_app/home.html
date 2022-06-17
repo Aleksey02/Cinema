@@ -13,14 +13,15 @@
   </div>
   <div class="carousel-inner" style="height: 300px">
     <div class="carousel-item active">
-      <img src="{{ last_active_film.poster.url }}" class="d-block w-100" alt="..."  style="align-items: center;" >
+      <a href="{% url 'film' slide1.film_id %}"><img src="{{ slide1.image.url }}" class="d-block w-100" alt="..."  style="align-items: center;" ></a>
     </div>
       <div class="carousel-item">
-          <img src="{{ last_two_film.poster.url }}" class="d-block w-100" alt="...">
+          <a href="{% url 'film' slide2.film_id %}"><img src="{{ slide2.image.url }}" class="d-block w-100" alt="..."></a>
       </div>
       <div class="carousel-item">
-          <img src="{{ last_three_film.poster.url }}" class="d-block w-100" alt="...">
+          <a href="{% url 'film' slide3.film_id %}"><img src="{{ slide3.image.url }}" class="d-block w-100" alt="..."></a>
       </div>
+
 
 
 {#    <div class="carousel-item">#}

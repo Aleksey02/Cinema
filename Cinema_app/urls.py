@@ -27,5 +27,9 @@ urlpatterns = [
     path('news-delete/<int:pk>', views.NewsDelete, name='news-delete'),
     path('news-delete-page/<int:pk>', views.NewsDeletePage.as_view(), name='news-delete-page'),
     path('news-create', views.NewsCreate.as_view(), name='news-create'),
+    path('poster-create', views.PosterCreate.as_view(), name='poster-create'),
+    path('poster-update/<int:pk>', views.PosterUpdate.as_view(), name='poster-update'),
+    path('poster-delete-page/<int:pk>', views.PosterDeletePage.as_view(), name='poster-delete-page'),
+    path('poster-delete/<int:pk>', views.PosterDelete, name='poster-delete'),
 
 ]

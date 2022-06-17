@@ -4,7 +4,27 @@
 
 {% block content %}
     <div class="container my-bg">
-    <div class="d-flex py-4 px-0">
+
+
+
+
+
+
+
+    {% comment %}TESTING!!!{% endcomment %}
+    <div class="row flex-column">
+  <div class="col-4">
+    <div class="list-group d-flex flex-row justify-content-between" id="list-tab" role="tablist">
+      <a class="my-nav-link active" id="list-info-list" data-bs-toggle="list" href="#list-info" role="tab" aria-controls="list-info">Описание</a>
+      <a class="my-nav-link" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Онлайн</a>
+      <a class="my-nav-link" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Скачать</a>
+      <a class="my-nav-link" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Смотрите также</a>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-info" role="tabpanel" aria-labelledby="list-info-list">
+<div class="d-flex py-4 px-0">
         {% if film.image %}
             <img src="{{ film.image.url }}" alt="" style="width: 300px; height: 400px">
         {% endif %}
@@ -13,8 +33,8 @@
             <p class="info-film"><span class="desc-film">Возрастной рейтинг: </span>{{ film.get_lim_age_display }}</p>
             <p class="info-film"><span class="desc-film">Год: </span>{{ film.year }}</p>
             <p class="info-film"><span class="desc-film">Жанр: </span>{{ film.get_ganre_display }}</p>
-            <p class="info-film"><span class="desc-film">Режиссёры: {% for director in film.director_set.all %}<a href="{% url 'director' director.pk %} " class="link-film">{{ director.full_name }}</a>,{% endfor %}</span></p>
-            <p class="info-film"><span class="desc-film">Актёры: {% for actor in film.actor_set.all %}<a href="{% url 'actor' actor.pk %}" class="link-film">{{ actor.full_name }}</a>,{% endfor %}</span></p>
+            <p class="info-film"><span class="desc-film">Режиссёры: {% for director in film.director.all %}<a href="{% url 'director' director.pk %} " class="link-film">{{ director.full_name }}</a>,{% endfor %}</span></p>
+            <p class="info-film"><span class="desc-film">Актёры: {% for actor in film.actor.all %}<a href="{% url 'actor' actor.pk %}" class="link-film">{{ actor.full_name }}</a>,{% endfor %}</span></p>
         </div>
     </div>
 
@@ -28,6 +48,7 @@
                 <tr>
                     <th scope="col">Автор комментария</th>
                     <th scope="col">Комментарий</th>
+                    <th scope="col">Дата создания</th>
                 </tr>
             </thead>
 
@@ -36,6 +57,7 @@
                     <tr>
                       <th scope="row">{{ comment.comment_author }}</th>
                       <td>{{ comment.comment_text }}</td>
+                      <td>{{ comment.date_create }}</td>
                     </tr>
             {% endfor %}
             </tbody>
@@ -58,9 +80,16 @@
     <p>Если у вас уже имеется аккаунт <a href="{% url 'login' %}" class="link-film">Log in</a></p>
     {% endif %}
 </div>
-
-
-
-
+      </div>
+      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+          <video src="{{ film.video.url }}" class="film-video" controls></video>
+      </div>
+      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+          <a href="{{ film.video.url }}" download>{{ film }}</a>
+      </div>
+      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">4</div>
+    </div>
+  </div>
 </div>
+    </div>
 {% endblock content %}

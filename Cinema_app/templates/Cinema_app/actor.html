@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container">
-        <h3>Фильмы в который снимался актёр {{ actor.full_name }}</h3>
+        <h3>Фильмы в который снимался актёр <i>{{ actor.full_name }}</i></h3>
         <div class="col-4 d-flex  gap-5">
             {% for film in film_play %}
             <div class="films">

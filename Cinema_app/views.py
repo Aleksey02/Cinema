@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from .models import Film, Comment, Actor, Director, New
+from .models import Film, Comment, Actor, Director, New, Poster
 from .forms import UserRegisterForm
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -33,6 +33,7 @@ def show_films(request): #работает класс
 
 def film(request, pk):
     some_film = Film.objects.get(pk = pk)
+
     #form = CommentForm()
 
     # if request.method == "POST":
@@ -57,15 +58,20 @@ class AddCommentView(LoginRequiredMixin, CreateView):
 class FilmView(ListView):
     model = Film
     template_name = "Cinema_app/home.html"
-    extra_context = {'film_count': 0}
-    if Film.objects.filter(poster__isnull=False).count() > 2:
-        last_active_film = Film.objects.filter(poster__isnull=False).order_by('-id')[0]
-        last_two_film = Film.objects.filter(poster__isnull=False).order_by('-id')[1]
-        last_three_film = Film.objects.filter(poster__isnull=False).order_by('-id')[2]
-        extra_context['last_active_film'] = last_active_film
-        extra_context['last_two_film'] = last_two_film
-        extra_context['last_three_film'] = last_three_film
-        extra_context['film_count'] = Film.objects.filter(poster__isnull=False).count()
+    posters = Poster.objects.all()
+    extra_context = {'film_count': posters.count(), 'posters':posters}
+    if posters.count()>=3:
+        extra_context['slide1'] = Poster.objects.all()[posters.count()-3]
+        extra_context['slide2'] = Poster.objects.all()[posters.count()-2]
+        extra_context['slide3'] = Poster.objects.all()[posters.count()-1]
+    # if Film.objects.filter(poster__isnull=False).count() > 2:
+    #last_active_film = Poster.objects.all()[0]
+    #     last_two_film = Film.objects.filter(poster__isnull=False).order_by('-id')[1]
+    #     last_three_film = Film.objects.filter(poster__isnull=False).order_by('-id')[2]
+
+    #     extra_context['last_two_film'] = last_two_film
+    #     extra_context['last_three_film'] = last_three_film
+    #     extra_context['film_count'] = Film.objects.filter(poster__isnull=False).count()
 
 
 
@@ -110,13 +116,13 @@ class ActorView(DetailView):
 
 def Actorf(request, pk):
     actor_name = Actor.objects.get(pk=pk)
-    film_play = Actor.objects.get(pk=pk).film.all()  #values('title', 'image')
+    film_play = Actor.objects.get(pk=pk).actor.all()  #values('title', 'image')
     context = {'actor': actor_name, 'film_play':film_play}
     return render(request, 'Cinema_app/actor.html', context)
 
 def Directorf(request, pk): # f так как нужно различноне название с моделью
     director_name = Director.objects.get(pk=pk)
-    film_play = Director.objects.get(pk=pk).film.all()  #values('title', 'image')
+    film_play = Director.objects.get(pk=pk).director.all()  #values('title', 'image')
     context = {'director': director_name, 'film_play':film_play}
     return render(request, 'Cinema_app/director.html', context)
 
@@ -127,6 +133,8 @@ class Adminka(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['news'] = New.objects.all()
+        context['posters'] = Poster.objects.all().order_by()
+        context['postersCount'] = Poster.objects.all().count()
         return context
 
 
@@ -181,3 +189,22 @@ class NewsCreate(CreateView):
     fields = '__all__'
     success_url = reverse_lazy('adminka')
 
+class PosterCreate(CreateView):
+    model = Poster
+    template_name = 'Cinema_app/adminka-update.html'
+    fields = '__all__'
+    success_url = reverse_lazy('adminka')
+
+class PosterUpdate(UpdateView):
+    model = Poster
+    template_name = 'Cinema_app/adminka-update.html'
+    fields = '__all__'
+
+class PosterDeletePage(DetailView):
+    model = Poster
+    template_name = 'Cinema_app/news-delete.html'
+
+def PosterDelete(request, pk):
+    poster = Poster.objects.get(pk=pk)
+    poster.delete()
+    return redirect('adminka')
