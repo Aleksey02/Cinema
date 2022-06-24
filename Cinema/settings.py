@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'Cinema_app.apps.CinemaAppConfig',
     'crispy_forms',
     'multiselectfield',
+    'django.contrib.admindocs',
 ]
 
 MIDDLEWARE = [

@@ -17,30 +17,10 @@ class RegisterForm(CreateView):
     success_url = reverse_lazy('login')
 
 
-def show_films(request): #работает класс
-    films = Film.objects.all()
-    last_active_film = Film.objects.all().order_by('-id')[0]
-    last_two_film = Film.objects.all().order_by('-id')[1]
-    last_three_film = Film.objects.all().order_by('-id')[2]
-    date = {
-        'films': films,
-        'last_active_film':last_active_film,
-        'last_two_film':last_two_film,
-        'last_three_film':last_three_film
-    }
-    return render(request, 'Cinema_app/home.html', context=date)
 
 
 def film(request, pk):
     some_film = Film.objects.get(pk = pk)
-
-    #form = CommentForm()
-
-    # if request.method == "POST":
-    #     form = CommentForm(request.POST)
-    #     if form.is_valid():
-    #         post = form.save(commit=False)
-    # else: , 'form': form
     date = {'film': some_film}
     return render(request, 'Cinema_app/film.html', context=date)
 
@@ -59,45 +39,25 @@ class FilmView(ListView):
     model = Film
     template_name = "Cinema_app/home.html"
     posters = Poster.objects.all()
-    extra_context = {'film_count': posters.count(), 'posters':posters}
-    if posters.count()>=3:
-        extra_context['slide1'] = Poster.objects.all()[posters.count()-3]
-        extra_context['slide2'] = Poster.objects.all()[posters.count()-2]
-        extra_context['slide3'] = Poster.objects.all()[posters.count()-1]
-    # if Film.objects.filter(poster__isnull=False).count() > 2:
-    #last_active_film = Poster.objects.all()[0]
-    #     last_two_film = Film.objects.filter(poster__isnull=False).order_by('-id')[1]
-    #     last_three_film = Film.objects.filter(poster__isnull=False).order_by('-id')[2]
-
-    #     extra_context['last_two_film'] = last_two_film
-    #     extra_context['last_three_film'] = last_three_film
-    #     extra_context['film_count'] = Film.objects.filter(poster__isnull=False).count()
+    extra_context = {'film_count': posters.count(), 'posters': posters}
+    if posters.count() >= 3:
+        extra_context['slide1'] = Poster.objects.all()[posters.count() - 3]
+        extra_context['slide2'] = Poster.objects.all()[posters.count() - 2]
+        extra_context['slide3'] = Poster.objects.all()[posters.count() - 1]
 
 
 
 
-# class FilmDetailView(DetailView):
-#     model = Film
-#     template_name = "Cinema_app/film.html"
 
 
 
 
-# class FilmFilterView(ListView):
-#     model = Film
-#     filt = Film.objects.filter(tipe_film='1_type')
-#     template_name = "Cinema_app/filter_film.html"
-def FilmFilter(request):
-    filt = Film.objects.filter(tipe_film='1_type')
-    return render(request, "Cinema_app/filter_film.html", {'filt': filt})
-def SerialFilter(request):
-    filt = Film.objects.filter(tipe_film='2_type')
-    return render(request, "Cinema_app/filter_film.html", {'filt': filt})
-def MultFilter(request):
-    filt = Film.objects.filter(tipe_film='3_type')
+def FilmFilter(request, type_film):
+    filt = Film.objects.filter(tipe_film=type_film)
     return render(request, "Cinema_app/filter_film.html", {'filt': filt})
 
-def get_grade(request):
+
+def get_grade(request): #Не работает
     if request.method == 'POST':
         form = GradeForm(request.POST)
     else:
@@ -208,3 +168,8 @@ def PosterDelete(request, pk):
     poster = Poster.objects.get(pk=pk)
     poster.delete()
     return redirect('adminka')
+
+def GanreFilter(request, ganre):
+    filt = Film.objects.filter(ganre)
+    success_url = reverse_lazy('film')
+    return render(request, "Cinema_app/filter_film.html", {'filt': filt})

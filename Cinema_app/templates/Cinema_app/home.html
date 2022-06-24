@@ -45,6 +45,9 @@
 
 {% block content %}
 <div class="container d-flex flex-wrap py-4" style="row-gap: 30px;">
+{% if film_list.count == 0 %}
+<h1>На данный момент не найдено ни одного фильма, зайдите в панель администратора и добавьте фильмы</h1>
+{% else %}
     {% for film in film_list %}
 
         <a href="{% url 'film' film.pk %}" class="d-flex flex-column align-items-center col-4 link-film">
@@ -56,6 +59,6 @@
             </a>
     {% endfor %}
 
-
+{% endif %}
 </div>
 {% endblock content %}

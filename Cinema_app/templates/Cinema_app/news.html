@@ -4,8 +4,8 @@
 <h1>Новости</h1>
     {% for news in object_list %}
         <div class="container" role="alert" style="height: 120px; overflow: hidden; border-bottom: 1px solid gray; margin-bottom: 10px">
-            <a href="{% url 'news-detail' news.pk %}" class="link-film"><h2>{{ news }}</h2></a>
-            <p>{{ news.description }}</p>
+            <a href="{% url 'news-detail' news.pk %}" class="link-film" style="color:white;"><h2>{{ news }}</h2></a>
+            <p class="link-film" style="transform: none">{{ news.description }}</p>
         </div>
     {% endfor %}
 {% endblock %}

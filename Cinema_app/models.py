@@ -6,18 +6,35 @@ from multiselectfield import MultiSelectField
 # Create your models here.
 
 class Actor(models.Model):
+    """
+    Модель Актёра, который учасвует в фильме.
+    Имеются поля: full_name - полное имя актёра (Фамилия Имя)
+    """
     full_name = models.CharField(max_length=50, verbose_name='name')
 
     def __str__(self):
         return self.full_name
 
 class Director(models.Model): #Режиссёр
+    """
+    Модель Режиссёра, который учасвует в фильме.
+    Имеются поля: full_name - полное имя режиссёра (Фамилия Имя)
+    """
     full_name = models.CharField(max_length=50, verbose_name='name')
 
     def __str__(self):
         return self.full_name
 
 class Film(models.Model):
+    """
+        Данная модель содержит в себе всю информацию о фильме и показывает это на сайте.
+        Имеются поля: title - Название фильма, description - полное описание фильма,
+        ganre - жанр данного фильма, tipe_film - Тип фильма(Фильм, сериал, мультфильм)
+        year - год выпуска фильма, image - постер фильма,
+        lim_age - возрастное ограничение фильма, country - страна выпуска фильма,
+        video - видео запись фильма, actor - актёры которые участвовали в фильме
+        director - режиссёры которые участвовали в фильме
+        """
     CHOICES = (
         ('1', 'Боевик'),
         ('2', 'Комедия'),
@@ -31,9 +48,9 @@ class Film(models.Model):
         ('10','Криминал'),
     )
     CHOICES_film = (
-        ('1_type', 'Фильм'),
-        ('2_type', 'Сериал'),
-        ('3_type', 'Мультфильм'),
+        ('film', 'Фильм'),
+        ('serial', 'Сериал'),
+        ('multfilm', 'Мультфильм'),
     )
     CHOICES_lim_age = (
         ('1', '3+'),
@@ -61,6 +78,13 @@ class Film(models.Model):
         return reverse('adminka')
 
 class Comment(models.Model):
+    """
+    Модель комментариев, позволяет добвлять комментарии к фильму.
+    Имеются поля: film - указывает к какому фильму будет относится комментарий
+    comment_text - Текст комментрия который вводит пользователь
+    comment_author - Имя автора комментария,
+    date_create - Дата создания комментария
+    """
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='comments')
     comment_text = models.TextField(verbose_name='Текст комментария')
     comment_author = models.CharField(max_length=50, verbose_name='Имя автора комментария')
@@ -77,6 +101,11 @@ class Comment(models.Model):
 
 
 class New(models.Model):
+    """
+    Модель новостей.
+    Имеются поля: title - название новости,
+    description - Текст новости
+    """
     title = models.CharField(max_length=50, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Текст')
 
@@ -87,6 +116,12 @@ class New(models.Model):
         return reverse('adminka')
 
 class Poster(models.Model):
+    """
+    Модель Слайдера. Данная модель будет работать только при 3 слайдах и только после создания фильмов!!!
+    Имеются поля: image - изображение которое будет на слайде,
+    title - Некое описание слайда,
+    film - фильм который относится к этому слайду
+    """
     image = models.ImageField(verbose_name='слайд 1')
     title = models.CharField(verbose_name='название слайда', max_length=50)
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='film', null=True)

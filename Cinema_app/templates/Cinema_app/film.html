@@ -32,7 +32,7 @@
             <p class="info-film"><span class="desc-film">Название: </span>{{ film.title }}</p>
             <p class="info-film"><span class="desc-film">Возрастной рейтинг: </span>{{ film.get_lim_age_display }}</p>
             <p class="info-film"><span class="desc-film">Год: </span>{{ film.year }}</p>
-            <p class="info-film"><span class="desc-film">Жанр: </span>{{ film.get_ganre_display }}</p>
+            <p class="info-film"><span class="desc-film">Жанр: </span>{% for ganre in film.get_ganre_list %}<a href="{% url 'filter_ganre' ganre  %}">{{ ganre }}</a>,  {% endfor %}</p>
             <p class="info-film"><span class="desc-film">Режиссёры: {% for director in film.director.all %}<a href="{% url 'director' director.pk %} " class="link-film">{{ director.full_name }}</a>,{% endfor %}</span></p>
             <p class="info-film"><span class="desc-film">Актёры: {% for actor in film.actor.all %}<a href="{% url 'actor' actor.pk %}" class="link-film">{{ actor.full_name }}</a>,{% endfor %}</span></p>
         </div>
