@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from .models import Film, Comment, Actor, Director, New, Poster
-from .forms import UserRegisterForm
+from Cinema_app.models import Film, Comment, Actor, Director, New, Poster
+from Cinema_app.forms import UserRegisterForm
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CommentForm
+from Cinema_app.forms import CommentForm
 
 
 
@@ -86,88 +86,13 @@ def Directorf(request, pk): # f так как нужно различноне н
     context = {'director': director_name, 'film_play':film_play}
     return render(request, 'Cinema_app/director.html', context)
 
-class Adminka(ListView):
-    model = Film
-    template_name = 'Cinema_app/adminka.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['news'] = New.objects.all()
-        context['posters'] = Poster.objects.all().order_by()
-        context['postersCount'] = Poster.objects.all().count()
-        return context
 
 
-class AdminkaUpdate(UpdateView):
-    model = Film
-    template_name = 'Cinema_app/adminka-update.html'
-    fields = '__all__'
 
-    def get_absolute_url(self):
-        return reverse('adminka')
 
-class AdminkaDeletePage(DetailView):
-    model = Film
-    template_name = 'Cinema_app/adminka-delete.html'
 
-def AdminkaDelete(request, pk):
-    film = Film.objects.get(pk=pk)
-    film.delete()
-    return redirect('adminka')
 
-class AdminkaCreate(CreateView):
-    model = Film
-    template_name = 'Cinema_app/adminka-update.html'
-    fields = '__all__'
-    success_url = reverse_lazy('adminka')
 
-class NewsList(ListView):
-    model = New
-    template_name = 'Cinema_app/news.html'
-
-class NewsDetail(DetailView):
-    model = New
-    template_name = 'Cinema_app/news-detail.html'
-
-class NewsUpdate(UpdateView):
-    model = New
-    template_name = 'Cinema_app/adminka-update.html'
-    fields = '__all__'
-
-def NewsDelete(request, pk):
-    news = New.objects.get(pk=pk)
-    news.delete()
-    return redirect('adminka')
-
-class NewsDeletePage(DetailView):
-    model = New
-    template_name = 'Cinema_app/news-delete.html'
-
-class NewsCreate(CreateView):
-    model = New
-    template_name = 'Cinema_app/adminka-update.html'
-    fields = '__all__'
-    success_url = reverse_lazy('adminka')
-
-class PosterCreate(CreateView):
-    model = Poster
-    template_name = 'Cinema_app/adminka-update.html'
-    fields = '__all__'
-    success_url = reverse_lazy('adminka')
-
-class PosterUpdate(UpdateView):
-    model = Poster
-    template_name = 'Cinema_app/adminka-update.html'
-    fields = '__all__'
-
-class PosterDeletePage(DetailView):
-    model = Poster
-    template_name = 'Cinema_app/news-delete.html'
-
-def PosterDelete(request, pk):
-    poster = Poster.objects.get(pk=pk)
-    poster.delete()
-    return redirect('adminka')
 
 def GanreFilter(request, ganre):
     filt = Film.objects.filter(ganre)
