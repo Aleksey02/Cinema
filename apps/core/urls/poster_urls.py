@@ -1,7 +1,6 @@
 from django.urls import path
 from apps.core.views import poster_views as views
 
-
 urlpatterns = [
     path('poster-create', views.PosterCreate.as_view(), name='poster-create'),
     path('poster-update/<int:pk>', views.PosterUpdate.as_view(), name='poster-update'),

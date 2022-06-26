@@ -1,9 +1,6 @@
-from django.contrib import admin
 from django.urls import path, include
 from apps.core.views import film_views as views
 from django.contrib.auth import views as auth_view
-
-
 
 urlpatterns = [
     path('', views.FilmView.as_view(), name='home'),
@@ -16,19 +13,10 @@ urlpatterns = [
     path('login/', auth_view.LoginView.as_view(template_name='Cinema_app/login.html'), name='login'),
     path('logout/', auth_view.LogoutView.as_view(template_name='Cinema_app/logout.html'), name='logout'),
 
-
-
     path('actor/<int:pk>/', views.Actorf, name='actor'),
     path('director/<int:pk>/', views.Directorf, name='director'),
 
-
     path('user-page/', views.UserInfo.as_view(), name='userPage'),
-
-
-
-
-
-
 
 ]
 urlpatterns += [

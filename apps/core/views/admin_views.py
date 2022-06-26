@@ -24,14 +24,17 @@ class AdminkaUpdate(UpdateView):
     def get_absolute_url(self):
         return reverse('adminka')
 
+
 class AdminkaDeletePage(DetailView):
     model = Film
     template_name = 'Cinema_app/adminka-delete.html'
+
 
 def AdminkaDelete(request, pk):
     film = Film.objects.get(pk=pk)
     film.delete()
     return redirect('adminka')
+
 
 class AdminkaCreate(CreateView):
     model = Film
