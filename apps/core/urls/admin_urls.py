@@ -1,5 +1,5 @@
 from django.urls import path
-from Cinema_app.views import admin_views as views
+from apps.core.views import admin_views as views
 
 urlpatterns = [
     path('adminka', views.Adminka.as_view(), name='adminka'),

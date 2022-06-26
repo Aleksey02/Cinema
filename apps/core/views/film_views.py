@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from Cinema_app.models import Film, Comment, Actor, Director, New, Poster
-from Cinema_app.forms import UserRegisterForm
+from apps.core.models import Film, Comment, Actor, Director, New, Poster
+from apps.core.forms import UserRegisterForm
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from Cinema_app.forms import CommentForm
+from apps.core.forms import CommentForm
+from django.contrib.auth.models import User
 
 
 
@@ -48,10 +49,6 @@ class FilmView(ListView):
 
 
 
-
-
-
-
 def FilmFilter(request, type_film):
     filt = Film.objects.filter(tipe_film=type_film)
     return render(request, "Cinema_app/filter_film.html", {'filt': filt})
@@ -88,13 +85,12 @@ def Directorf(request, pk): # f так как нужно различноне н
 
 
 
-
-
-
-
-
-
 def GanreFilter(request, ganre):
     filt = Film.objects.filter(ganre)
     success_url = reverse_lazy('film')
     return render(request, "Cinema_app/filter_film.html", {'filt': filt})
+
+
+class UserInfo(ListView):
+    model = User
+    template_name = 'Cinema_app/user-page.html'

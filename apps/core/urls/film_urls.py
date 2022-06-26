@@ -1,7 +1,8 @@
 from django.contrib import admin
-from django.urls import path
-from Cinema_app.views import film_views as views
+from django.urls import path, include
+from apps.core.views import film_views as views
 from django.contrib.auth import views as auth_view
+
 
 
 urlpatterns = [
@@ -21,10 +22,15 @@ urlpatterns = [
     path('director/<int:pk>/', views.Directorf, name='director'),
 
 
+    path('user-page/', views.UserInfo.as_view(), name='userPage'),
 
 
 
 
 
 
+
+]
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

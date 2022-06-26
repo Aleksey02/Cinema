@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from Cinema_app.models import New
+from apps.core.models import New
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 

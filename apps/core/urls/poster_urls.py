@@ -1,5 +1,5 @@
 from django.urls import path
-from Cinema_app.views import poster_views as views
+from apps.core.views import poster_views as views
 
 
 urlpatterns = [
