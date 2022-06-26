@@ -15,7 +15,8 @@ class Actor(models.Model):
     def __str__(self):
         return self.full_name
 
-class Director(models.Model): #Режиссёр
+
+class Director(models.Model):  # Режиссёр
     """
     Модель Режиссёра, который учасвует в фильме.
     Имеются поля: full_name - полное имя режиссёра (Фамилия Имя)
@@ -24,6 +25,7 @@ class Director(models.Model): #Режиссёр
 
     def __str__(self):
         return self.full_name
+
 
 class Film(models.Model):
     """
@@ -40,12 +42,12 @@ class Film(models.Model):
         ('2', 'Комедия'),
         ('3', 'Триллер'),
         ('4', 'Ужасы'),
-        ('5','Детектив'),
-        ('6','Драма'),
-        ('7','Фэнтези'),
-        ('8','Фантастика'),
-        ('9','Приключения'),
-        ('10','Криминал'),
+        ('5', 'Детектив'),
+        ('6', 'Драма'),
+        ('7', 'Фэнтези'),
+        ('8', 'Фантастика'),
+        ('9', 'Приключения'),
+        ('10', 'Криминал'),
     )
     CHOICES_film = (
         ('film', 'Фильм'),
@@ -77,6 +79,7 @@ class Film(models.Model):
     def get_absolute_url(self):
         return reverse('adminka')
 
+
 class Comment(models.Model):
     """
     Модель комментариев, позволяет добвлять комментарии к фильму.
@@ -97,9 +100,6 @@ class Comment(models.Model):
         return self.comment_author
 
 
-
-
-
 class New(models.Model):
     """
     Модель новостей.
@@ -114,6 +114,7 @@ class New(models.Model):
 
     def get_absolute_url(self):
         return reverse('adminka')
+
 
 class Poster(models.Model):
     """
