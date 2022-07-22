@@ -26,15 +26,16 @@
       <div class="tab-pane fade show active" id="list-info" role="tabpanel" aria-labelledby="list-info-list">
 <div class="d-flex py-4 px-0">
         {% if film.image %}
-            <img src="{{ film.image.url }}" alt="" style="width: 300px; height: 400px">
+            <img src="{{ film.image }}" alt="" style="width: 300px; height: 400px">
         {% endif %}
         <div class="px-5 d-flex flex-column">
             <p class="info-film"><span class="desc-film">Название: </span>{{ film.title }}</p>
-            <p class="info-film"><span class="desc-film">Возрастной рейтинг: </span>{{ film.get_lim_age_display }}</p>
-            <p class="info-film"><span class="desc-film">Год: </span>{{ film.year }}</p>
-            <p class="info-film"><span class="desc-film">Жанр: </span>{% for ganre in film.get_ganre_list %}<a href="{% url 'filter_ganre' ganre  %}">{{ ganre }}</a>,  {% endfor %}</p>
+            <p class="info-film"><span class="desc-film">Возрастной рейтинг:  <a href="{% url 'filter_film' 'age' film.lim_age  %}" class="link-film">{{ film.get_lim_age_display }}</a></span></p>
+            <p class="info-film"><span class="desc-film">Год: <a href="{% url 'filter_film' 'year' film.year  %}" class="link-film">{{ film.year }}</a></span></p>
+            <p class="info-film"><span class="desc-film">Жанр: {% for ganre in film.ganre %}<a href="{% url 'filter_film' 'ganre' ganre  %}" class="link-film">{{ ganre }}</a>,  {% endfor %}</span></p>
             <p class="info-film"><span class="desc-film">Режиссёры: {% for director in film.director.all %}<a href="{% url 'director' director.pk %} " class="link-film">{{ director.full_name }}</a>,{% endfor %}</span></p>
             <p class="info-film"><span class="desc-film">Актёры: {% for actor in film.actor.all %}<a href="{% url 'actor' actor.pk %}" class="link-film">{{ actor.full_name }}</a>,{% endfor %}</span></p>
+            <p class="info-film"><span class="desc-film">Страна: <a href="{% url 'filter_film' 'country' film.country  %}" class="link-film">{{ film.country }}</a></span></p>
         </div>
     </div>
 
@@ -82,10 +83,10 @@
 </div>
       </div>
       <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-          <video src="{{ film.video.url }}" class="film-video" controls></video>
+{#          <video src="{{ film.video.url }}" class="film-video" controls></video>#}
       </div>
       <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-          <a href="{{ film.video.url }}" download>{{ film }}</a>
+{#          <a href="{{ film.video.url }}" download>{{ film }}</a>#}
       </div>
       <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">4</div>
     </div>

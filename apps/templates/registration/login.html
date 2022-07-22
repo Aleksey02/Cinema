@@ -1,0 +1,15 @@
+{% extends 'Cinema_app/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+<h1>Login Page</h1>
+    <form method="post">
+    {% csrf_token %}
+      {{ form|crispy }}
+    <br>
+    <button class="btn btn-primary">Log in</button>
+    </form>
+    <p>Если вы заыбыли пароль:  <a href="{% url 'password_reset' %}">Сбросить пароль</a></p>
+</div>
+{% endblock %}

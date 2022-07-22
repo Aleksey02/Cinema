@@ -27,6 +27,7 @@ class Director(models.Model):  # Режиссёр
         return self.full_name
 
 
+
 class Film(models.Model):
     """
         Данная модель содержит в себе всю информацию о фильме и показывает это на сайте.
@@ -38,40 +39,43 @@ class Film(models.Model):
         director - режиссёры которые участвовали в фильме
         """
     CHOICES = (
-        ('1', 'Боевик'),
-        ('2', 'Комедия'),
-        ('3', 'Триллер'),
-        ('4', 'Ужасы'),
-        ('5', 'Детектив'),
-        ('6', 'Драма'),
-        ('7', 'Фэнтези'),
-        ('8', 'Фантастика'),
-        ('9', 'Приключения'),
-        ('10', 'Криминал'),
+        ('боевик', 'Боевик'),
+        ('комедия', 'Комедия'),
+        ('триллер', 'Триллер'),
+        ('ужасы', 'Ужасы'),
+        ('детектив', 'Детектив'),
+        ('драма', 'Драма'),
+        ('фэнтези', 'Фэнтези'),
+        ('фантастика', 'Фантастика'),
+        ('приключения', 'Приключения'),
+        ('криминал', 'Криминал'),
+        ('мелодрама', 'мелодрама')
     )
     CHOICES_film = (
-        ('film', 'Фильм'),
-        ('serial', 'Сериал'),
-        ('multfilm', 'Мультфильм'),
+        ('movie', 'Фильм'),
+        ('tv-series', 'Сериал'),
+        ('carton', 'Мультфильм'),
     )
     CHOICES_lim_age = (
-        ('1', '3+'),
-        ('2', '12+'),
-        ('3', '16+'),
-        ('4', '18+'),
+        ('0', '16+'),
+        ('3', '3+'),
+        ('6', '6+'),
+        ('12', '12+'),
+        ('16', '16+'),
+        ('18', '18+'),
     )
 
     title = models.CharField(max_length=200, verbose_name='Название')
-    description = models.TextField(verbose_name='Описание')
-    ganre = MultiSelectField(verbose_name='Жанр', choices=CHOICES, max_length=25)
-    tipe_film = models.CharField(verbose_name='Тип фильма', choices=CHOICES_film, max_length=50, default='1_type')
-    year = models.IntegerField(verbose_name='Год выпуска')
-    image = models.ImageField(verbose_name='Картинка', null=True)
-    lim_age = models.CharField(verbose_name='Возрастной рейтинг', choices=CHOICES_lim_age, max_length=50, default='1')
+    description = models.TextField(verbose_name='Описание', null=True, blank=True)
+    ganre = MultiSelectField(verbose_name='Жанр', choices=CHOICES, max_length=25, default='комедия')
+    tipe_film = models.CharField(verbose_name='Тип фильма', choices=CHOICES_film, max_length=50, default='film')
+    year = models.IntegerField(verbose_name='Год выпуска', null=True, blank=True)
+    image = models.CharField(verbose_name='Картинка', null=True, blank=True, max_length=300)
+    lim_age = models.CharField(verbose_name='Возрастной рейтинг', choices=CHOICES_lim_age, max_length=50, default='16')
     country = models.CharField(verbose_name='Страна', max_length=50, blank=True, null=True)
-    video = models.FileField(upload_to='videos_uploaded', null=True)
-    actor = models.ManyToManyField(Actor, related_name='actor')
-    director = models.ManyToManyField(Director, related_name='director')
+    video = models.FileField(upload_to='videos_uploaded', null=True, blank=True)
+    actor = models.ManyToManyField(Actor)#, related_name='actors'
+    director = models.ManyToManyField(Director, related_name='director', null=True, blank=True)
 
     def __str__(self):
         return self.title

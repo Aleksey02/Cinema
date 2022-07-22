@@ -1,4 +1,5 @@
 {% extends 'Cinema_app/base.html' %}
+
 {% load static %}
 
 {% block title %} Cinema {% endblock title %}
@@ -52,13 +53,17 @@
 
         <a href="{% url 'film' film.pk %}" class="d-flex flex-column align-items-center col-4 link-film">
             {% if film.image %}
-            <img src="{{ film.image.url }}" alt="" style="width: 300px; height: 400px">
+            <img src="{{ film.image }}" alt="" style="width: 300px; height: 400px">
             {{ film.title }}
 
             {% endif %}
             </a>
     {% endfor %}
 
+
 {% endif %}
 </div>
 {% endblock content %}
+{% block pagination %}
+{% include 'Cinema_app/pagination.html' %}
+{% endblock %}
