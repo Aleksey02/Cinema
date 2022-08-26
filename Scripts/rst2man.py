@@ -1,4 +1,4 @@
-#!D:\learning\program\Cinema\Scripts\python.exe
+#!d:\learning\program\cinema\scripts\python.exe
 
 # Author:
 # Contact: grubert@users.sf.net

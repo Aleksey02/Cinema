@@ -9,26 +9,25 @@ urlpatterns = [
     path('film/filter/<str:filter>/<str:value>', views.FilmFilter, name='filter_film'),
 
     path('register/', views.RegisterForm.as_view(), name='register'),
-    path('login/', auth_view.LoginView.as_view(template_name='Cinema_app/login.html'), name='login'),
+    #path('login/', auth_view.LoginView.as_view(template_name='Cinema_app/login.html'), name='login'),
     #path('logout/', auth_view.LogoutView.as_view(template_name='registration/logout.html'), name='mylogout'),
     path('profile/', views.Profile, name='profile'),
 
-    path('actor/<int:pk>/', views.Actorf, name='actor'),
-    path('director/<int:pk>/', views.Directorf, name='director'),
+
 
     path('user-page/', views.UserInfo.as_view(), name='userPage'),
-    path('api/', views.my_api, name='my_api'),
+    path('dowloadfilm/', views.my_api, name='my_api'),
 ]
 
 urlpatterns += [
-    path("login/", auth_view.LoginView.as_view(), name="login"),
+    path("login/", views.LoginUser.as_view(template_name='registration/login.html'), name="login"),
     path("logout/", auth_view.LogoutView.as_view(template_name='registration/logout.html'), name="logout"),
     path(
-        "password_change/", auth_view.PasswordChangeView.as_view(), name="password_change"
+        "password_change/", auth_view.PasswordChangeView.as_view(template_name='registration/password_change.html'), name="password_change"
     ),
     path(
         "password_change/done/",
-        auth_view.PasswordChangeDoneView.as_view(),
+        auth_view.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'),
         name="password_change_done",
     ),
     path("password_reset/", auth_view.PasswordResetView.as_view(), name="password_reset"),

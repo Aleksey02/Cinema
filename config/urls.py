@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('apps.core.urls.film_urls')),
     path('', include('apps.core.urls.news_urls')),
     path('', include('apps.core.urls.poster_urls')),
+    path('api/', include('apps.api.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
 

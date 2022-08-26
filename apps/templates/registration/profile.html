@@ -1,9 +1,9 @@
 {% extends 'Cinema_app/base.html' %}
 {% block content %}
 <h2>Личный кабинет</h2>
-    <div>
+    <div class="container">
     <p>Ваш никнейм: {{ user.username }}</p>
-    <p>Ваш email: {{ user.email }}</p>
+    {% if user.email %}<p>Ваш email: {{ user.email }}</p>{% endif %}
     <p>Дата регистрации: {{ user.date_joined.date }}</p>
     <a href="{% url 'password_change' %}">Сменить пароль</a>
     </div>

@@ -9,7 +9,7 @@
           crossorigin="anonymous">
     <link href="{% get_static_prefix %}style.css" rel="stylesheet">
 </head>
-<body>
+<body class="base-body">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -29,6 +29,24 @@
           <a class="nav-link" href="{% url 'filter_film' 'typeFilm' 'carton' %}">Мультфильмы</a>
         </li>
         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Жанры
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'боевик'  %}">Боевик</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'детектив'  %}">Детектив</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'драма'  %}">Драма</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'комедия'  %}">Комедия</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'криминал'  %}">Криминал</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'мелодрама'  %}">Мелодрама</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'приключения'  %}">Приключения</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'триллер'  %}">Триллер</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'ужасы'  %}">Ужасы</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'фантастика'  %}">Фантастика</a></li>
+            <li><a class="dropdown-item" href="{% url 'filter_film' 'ganre' 'фэнтези'  %}">Фэнтези</a></li>
+          </ul>
+        </li>
+          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Аккаунт
           </a>
@@ -67,6 +85,7 @@
 
     {% endblock content %}
 {% block pagination %}
+
 {% endblock %}
 {% block footer %}
 {% endblock %}

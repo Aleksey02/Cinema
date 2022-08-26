@@ -4,7 +4,7 @@
 
 {% block title %} Cinema {% endblock title %}
 {% block content %}
-    {% if value %}<h2>Поиск по фильтру: {{ value.capitalize }}</h2>{% endif %}
+    {% if value %}<h2>Поиск по фильтру: <span  style="text-transform: capitalize;">{{ value }}</span></h2>{% endif %}
     <div class="container d-flex flex-wrap py-4 my-bg" style="row-gap: 30px;">
     {% for film in filt %}
 
@@ -18,4 +18,6 @@
     {% endfor %}
         </div>
 {% endblock content %}
-
+{% block pagination %}
+{{ page_obj }}
+{% endblock %}

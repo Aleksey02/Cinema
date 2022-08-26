@@ -49,7 +49,7 @@ class Film(models.Model):
         ('фантастика', 'Фантастика'),
         ('приключения', 'Приключения'),
         ('криминал', 'Криминал'),
-        ('мелодрама', 'мелодрама')
+        ('мелодрама', 'Мелодрама')
     )
     CHOICES_film = (
         ('movie', 'Фильм'),
@@ -57,7 +57,7 @@ class Film(models.Model):
         ('carton', 'Мультфильм'),
     )
     CHOICES_lim_age = (
-        ('0', '16+'),
+        ('0', '0+'),
         ('3', '3+'),
         ('6', '6+'),
         ('12', '12+'),
@@ -73,9 +73,8 @@ class Film(models.Model):
     image = models.CharField(verbose_name='Картинка', null=True, blank=True, max_length=300)
     lim_age = models.CharField(verbose_name='Возрастной рейтинг', choices=CHOICES_lim_age, max_length=50, default='16')
     country = models.CharField(verbose_name='Страна', max_length=50, blank=True, null=True)
-    video = models.FileField(upload_to='videos_uploaded', null=True, blank=True)
-    actor = models.ManyToManyField(Actor)#, related_name='actors'
-    director = models.ManyToManyField(Director, related_name='director', null=True, blank=True)
+    actor = models.ManyToManyField(Actor, related_name='actor')#, related_name='actors'
+    director = models.ManyToManyField(Director, related_name='director')
 
     def __str__(self):
         return self.title

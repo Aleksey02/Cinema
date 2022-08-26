@@ -1,15 +1,53 @@
-{% extends 'Cinema_app/base.html' %}
-{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-    <div class="container">
-<h1>Login Page</h1>
-    <form method="post">
-    {% csrf_token %}
-      {{ form|crispy }}
-    <br>
-    <button class="btn btn-primary">Log in</button>
-    </form>
-    <p>Если вы заыбыли пароль:  <a href="{% url 'password_reset' %}">Сбросить пароль</a></p>
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link href="{% get_static_prefix %}style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="login-box">
+  <h2>{{ title }}</h2>
+  <form method="post">
+      {% csrf_token %}
+
+      {% for f in form %}
+
+
+    <div class="user-box">
+      {{ f }}
+      <label>{{ f.label }}</label>
+    </div>
+      {% endfor %}
+    <button class="login-button"><a>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Submit
+    </a></button>
+{% block error %}<div class="form-error">{{ form.non_field_errors }}
+ {% if form.errors %}<p>Если вы заыбыли пароль:  <a href="{% url 'password_reset' %}" class="error-button"><span></span>
+      <span></span>
+      <span></span>
+      <span></span>Сбросить пароль</a></p>
+     <p>Что бы перейти на главную страницу:
+ <a href="{% url 'home' %}" class="error-button"><span></span>
+      <span></span>
+      <span></span>
+      <span></span>На главую страницу</a></p>
+ {% endif %}</div>{% endblock %}
+  </form>
+
 </div>
-{% endblock %}
+
+
+<script src="{% get_static_prefix %}main.js"></script>
+  </body>
+
+</html>
+
+

@@ -33,8 +33,8 @@
             <p class="info-film"><span class="desc-film">Возрастной рейтинг:  <a href="{% url 'filter_film' 'age' film.lim_age  %}" class="link-film">{{ film.get_lim_age_display }}</a></span></p>
             <p class="info-film"><span class="desc-film">Год: <a href="{% url 'filter_film' 'year' film.year  %}" class="link-film">{{ film.year }}</a></span></p>
             <p class="info-film"><span class="desc-film">Жанр: {% for ganre in film.ganre %}<a href="{% url 'filter_film' 'ganre' ganre  %}" class="link-film">{{ ganre }}</a>,  {% endfor %}</span></p>
-            <p class="info-film"><span class="desc-film">Режиссёры: {% for director in film.director.all %}<a href="{% url 'director' director.pk %} " class="link-film">{{ director.full_name }}</a>,{% endfor %}</span></p>
-            <p class="info-film"><span class="desc-film">Актёры: {% for actor in film.actor.all %}<a href="{% url 'actor' actor.pk %}" class="link-film">{{ actor.full_name }}</a>,{% endfor %}</span></p>
+            <p class="info-film"><span class="desc-film">Режиссёры: {% for director in film.director.all %}<a href="{% url 'filter_film' 'director' director.pk %} " class="link-film">{{ director.full_name }}</a>,{% endfor %}</span></p>
+            <p class="info-film"><span class="desc-film">Актёры: {% for actor in film.actor.all %}<a href="{% url 'filter_film' 'actor' actor.pk %}" class="link-film">{{ actor.full_name }}</a>,{% endfor %}</span></p>
             <p class="info-film"><span class="desc-film">Страна: <a href="{% url 'filter_film' 'country' film.country  %}" class="link-film">{{ film.country }}</a></span></p>
         </div>
     </div>

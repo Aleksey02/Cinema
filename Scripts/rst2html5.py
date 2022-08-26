@@ -1,4 +1,4 @@
-#!D:\learning\program\Cinema\Scripts\python.exe
+#!d:\learning\program\cinema\scripts\python.exe
 # -*- coding: utf8 -*-
 # :Copyright: © 2015 Günter Milde.
 # :License: Released under the terms of the `2-Clause BSD license`_, in short:
