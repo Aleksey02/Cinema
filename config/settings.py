@@ -176,8 +176,8 @@ REST_FRAMEWORK = {
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = "lyosha2002stich@yandex.ru"
-EMAIL_HOST_PASSWORD = "9354896lyosha"
+EMAIL_HOST_USER = "@yandex.ru"
+EMAIL_HOST_PASSWORD = "pass"
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
